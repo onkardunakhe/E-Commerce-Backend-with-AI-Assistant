@@ -2,8 +2,9 @@ package com.Crud.Crud.Controllers;
 
 import com.Crud.Crud.Service.AiService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -11,11 +12,8 @@ import org.springframework.web.bind.annotation.*;
 public class AiController {
     private final AiService aiService;
 
-    @PostMapping("/assistant")
-    public String assistant(@RequestBody String question) {
-
-        return aiService.askAi(question);
-
+    @GetMapping("/query")
+    public Map<String, String> query(@RequestParam String question) {
+        return Map.of("answer", aiService.answerUserQuery(question));
     }
-
 }
